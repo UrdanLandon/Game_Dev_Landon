@@ -9,7 +9,7 @@ This Webpage: <a href="https://urdanlandon.github.io/Game_Dev_Landon/"> This Pag
   table, th, td {border: 1 px solid black; border-radius: 5 px;}
 </style>
   <style>
-    table, tr, td {border: 2 px dashed blue}
+    table, tr, td {border: 2 px dashed black}
   </style>
 </head>
   <body>
@@ -120,7 +120,7 @@ This Webpage: <a href="https://urdanlandon.github.io/Game_Dev_Landon/"> This Pag
      <imput id="myNum01" type=number value="4" ><br>
 
        <imput type=button value="myEvent squares" onclick="{
-         let myIn01 = parseFloat(document.getElementById('myNum01').value)
+         let myIn01 = parseFloat(document.getElementById('myNum01').value) 
          let myAnswer = myIn01 * myIn01
          document.getElementById('myDiv01').innerHTML = myIn01 + ' squared = ' + myAnswer
        }"><br>
