@@ -1,1 +1,28 @@
 <h2 align=center> Ordeal of Strings</h2>
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <title>t1a06-proper-and-variables-Landon.html</title>
+    <style>
+      b { colour: blue; }
+      </style>
+      <script>
+           function sayHello() {
+             myNum = 3;
+             myString = ' Hello ';
+             myFloat = 17.5;
+             myBool = true;
+             myOut = document.getElementById('Mydiv01');
+             myOut.innerHTMl = muNum + myString + myFloat + ', ' + myBool;
+             if (myBool) {myOut.innerHTML += ', WOW';}
+           }
+    </script>
+  </head>
+  <body>
+    <p>This is <b>bold</b> text. </p>
+    <button onclick="sayHello()">Click Me</button>
+    <div id="myDiv01">...</div>
+  </body>
+</html>
