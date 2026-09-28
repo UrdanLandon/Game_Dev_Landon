@@ -14,12 +14,12 @@ Version 0.0.1
 
      <h4> Example Working Code</h4>
 
-     <imput id="myNum01" type=number value="4" ><br>
+     <imput id="myNum" type=number value="4" ><br>
 
        <imput type=button value="myEvent squares" onclick="{ 
-        let myIn = parseFloat(document.getElementById('myNum01').value) 
-        let myAnswer = myIn * myIn
-        document.getElementById('myDiv01').innerHTML = myIn + ' squared = ' + myAnswer
+        let myIn = parseFloat(document.getElementById('myNum').value) 
+        myAns = myIn * myIn
+        document.getElementById('myDiv').innerHTML = myIn + ' squared = ' + myAns
        }"><br>
 
          <div id="myDiv01">...</div>
