@@ -11,8 +11,8 @@
 
 <h4> Example working code:</h4>
 
-Max loops: <imput id="myNum01" type=number value="4"><br>
-Weird number: <imput id="myWeird" type=number value="2"><br>
+Max loops: <imput id="myNum01" type=number value="4" ><br>
+Weird number: <imput id="myWeird" type=number value="2" ><br>
 
   <imput type=button value="Basic For Loop with Decisions" onclick="{
     document.getElementById('myDiv01').innerHTML = ''
@@ -21,9 +21,9 @@ Weird number: <imput id="myWeird" type=number value="2"><br>
 
     for (let myLoop = 0; myLoop < myMax; myLoop++){
       if (myLoop * 2 > myMax){
-        myTemp+= ' cool '
+        myTemp += ' cool '
       }
-      myTemp += ' Loop number ' + myLoop + ' <br> '
+      myTemp += 'Loop number: ' + myLoop + ' <br> '
     }
     document.getElementById('myDiv01').innerHTML = myTemp
   }">
