@@ -2,9 +2,9 @@
 
 <a href=""> Good reference to Javascript Loops </a><br>
 
-<h4> Example imput output code</h4>
+<h4> Example loop code</h4>
 <pre>
-  for (let myLoop = 0; myLoop < myMax; myLoop++){
+  for (let myLoop = 0; myLoop < myMax; myLoop++ ){
     // your code here
     }
 </pre>
@@ -19,7 +19,7 @@ Weird number: <imput id="myWeird" type=number value="2" ><br>
     let myTemp= ''
     let myMax = parseInt(document.getElementById('myNum01').value)
 
-    for (let myLoop = 0; myLoop < myMax; myLoop++){
+    for (let myLoop = 0; myLoop < myMax; myLoop++ ){
       if (myLoop * 2 > myMax){
         myTemp += ' cool '
       }
@@ -36,7 +36,7 @@ Weird number: <imput id="myWeird" type=number value="2" ><br>
 
       for (let myLoop = 0; myLoop < myMax; myLoop++ ){
          if (myLoop % 2 == 0){
-            myTemp += 'Even Number, '
+            myTemp += ' Even Number, '
          }
       myTemp += 'Loop number: ' + myLoop + '<br>'
       }
