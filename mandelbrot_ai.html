@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mandelbrot Explorer</title>
 
+ 
+}
   <style>
     * {
       box-sizing: border-box;
@@ -61,5 +63,230 @@ let selectionStartY = 0;
 let selectionCurrentX = 0;
 let selectionCurrentY = 0;
   </script>
+  <script>
+    function pixelToComplex(pixelX, pixelY) {
+  const viewHeight = viewWidth * canvasHeight / canvasWidth;
+
+  const real = centerReal
+    + (pixelX / canvasWidth - 0.5) * viewWidth;
+
+  const imaginary = centerImaginary
+    + (0.5 - pixelY / canvasHeight) * viewHeight;
+
+  return { real, imaginary };
+}
+  </script>
+  
+  <script>
+    function getFractalColor(real, imaginary) {
+  let zReal = 0;
+  let zImaginary = 0;
+  let iteration = 0;
+
+  while (
+    zReal * zReal + zImaginary * zImaginary <= 4 &&
+    iteration < maxIterations
+  ) {
+    const nextReal =
+      zReal * zReal - zImaginary * zImaginary + real;
+
+    const nextImaginary =
+      2 * zReal * zImaginary + imaginary;
+
+    zReal = nextReal;
+    zImaginary = nextImaginary;
+    iteration++;
+  }
+
+  if (iteration === maxIterations) {
+    return [0, 0, 0];
+  }
+
+  // Smooth coloring reduces harsh bands.
+  const magnitude = Math.sqrt(zReal * zReal + zImaginary * zImaginary);
+  const smoothIteration = iteration + 1
+    - Math.log2(Math.max(1, Math.log2(magnitude)));
+
+  const colorPosition = smoothIteration * 0.09;
+
+  const red = 127 + 128 * Math.sin(colorPosition);
+  const green = 127 + 128 * Math.sin(colorPosition + 2.1);
+  const blue = 127 + 128 * Math.sin(colorPosition + 4.2);
+
+  return [
+    Math.round(red),
+    Math.round(green),
+    Math.round(blue)
+  ];
+}
+  </script>
+  
+  <script>
+    let fractalImage = null;
+
+function renderFractal() {
+  const imageData = canvasContext.createImageData(
+    canvasWidth,
+    canvasHeight
+  );
+
+  const pixelData = imageData.data;
+
+  for (let pixelY = 0; pixelY < canvasHeight; pixelY++) {
+    for (let pixelX = 0; pixelX < canvasWidth; pixelX++) {
+      const { real, imaginary } = pixelToComplex(pixelX, pixelY);
+
+      const [red, green, blue] = getFractalColor(real, imaginary);
+      const pixelIndex = (pixelY * canvasWidth + pixelX) * 4;
+
+      pixelData[pixelIndex] = red;
+      pixelData[pixelIndex + 1] = green;
+      pixelData[pixelIndex + 2] = blue;
+      pixelData[pixelIndex + 3] = 255;
+    }
+  }
+
+  fractalImage = imageData;
+  canvasContext.putImageData(fractalImage, 0, 0);
+}
+  </script>
+
+  <script>
+    function resizeCanvas() {
+  canvasWidth = window.innerWidth;
+  canvasHeight = window.innerHeight;
+
+  fractalCanvas.width = canvasWidth;
+  fractalCanvas.height = canvasHeight;
+
+  renderFractal();
+}
+
+window.addEventListener("resize", resizeCanvas);
+  </script>
+
+  <script>
+    fractalCanvas.addEventListener("wheel", (event) => {
+  event.preventDefault();
+
+  const mouseX = event.offsetX;
+  const mouseY = event.offsetY;
+
+  const pointBeforeZoom = pixelToComplex(mouseX, mouseY);
+
+  const zoomFactor = event.deltaY < 0 ? 0.8 : 1.25;
+
+  viewWidth *= zoomFactor;
+  viewWidth = Math.max(1e-14, Math.min(3.5, viewWidth));
+
+  const pointAfterZoom = pixelToComplex(mouseX, mouseY);
+
+  centerReal += pointBeforeZoom.real - pointAfterZoom.real;
+  centerImaginary +=
+    pointBeforeZoom.imaginary - pointAfterZoom.imaginary;
+
+  renderFractal();
+}, { passive: false });
+  </script>
+  
+  <script>
+    function drawSelectionRectangle() {
+  if (!fractalImage) return;
+
+  canvasContext.putImageData(fractalImage, 0, 0);
+
+  if (!isSelecting) return;
+
+  const left = Math.min(selectionStartX, selectionCurrentX);
+  const top = Math.min(selectionStartY, selectionCurrentY);
+  const width = Math.abs(selectionCurrentX - selectionStartX);
+  const height = Math.abs(selectionCurrentY - selectionStartY);
+
+  canvasContext.save();
+  canvasContext.strokeStyle = "#ffffff";
+  canvasContext.lineWidth = 1.5;
+  canvasContext.setLineDash([7, 5]);
+  canvasContext.strokeRect(left, top, width, height);
+  canvasContext.restore();
+}
+  </script>
+
+  <script>
+    fractalCanvas.addEventListener("pointerdown", (event) => {
+  if (event.button !== 0) return;
+
+  isSelecting = true;
+  selectionStartX = event.offsetX;
+  selectionStartY = event.offsetY;
+  selectionCurrentX = event.offsetX;
+  selectionCurrentY = event.offsetY;
+
+  fractalCanvas.setPointerCapture(event.pointerId);
+  drawSelectionRectangle();
+});
+
+fractalCanvas.addEventListener("pointermove", (event) => {
+  if (!isSelecting) return;
+
+  selectionCurrentX = event.offsetX;
+  selectionCurrentY = event.offsetY;
+
+  drawSelectionRectangle();
+});
+  </script>
+
+  <script>
+    fractalCanvas.addEventListener("pointerup", () => {
+  if (!isSelecting) return;
+
+  isSelecting = false;
+
+  const left = Math.min(selectionStartX, selectionCurrentX);
+  const top = Math.min(selectionStartY, selectionCurrentY);
+  const width = Math.abs(selectionCurrentX - selectionStartX);
+  const height = Math.abs(selectionCurrentY - selectionStartY);
+
+  if (width > 5 && height > 5) {
+    const selectionCenterX = left + width / 2;
+    const selectionCenterY = top + height / 2;
+
+    const selectedCenter = pixelToComplex(
+      selectionCenterX,
+      selectionCenterY
+    );
+
+    centerReal = selectedCenter.real;
+    centerImaginary = selectedCenter.imaginary;
+
+    viewWidth *= width / canvasWidth;
+
+    renderFractal();
+  } else {
+    drawSelectionRectangle();
+  }
+});
+
+fractalCanvas.addEventListener("pointercancel", () => {
+  isSelecting = false;
+  if (fractalImage) {
+    canvasContext.putImageData(fractalImage, 0, 0);
+  }
+});
+  </script>
+
+  <script>
+    fractalCanvas.addEventListener("dblclick", () => {
+  centerReal = -0.5;
+  centerImaginary = 0;
+  viewWidth = 3.5;
+  maxIterations = 120;
+
+  renderFractal();
+});
+
+resizeCanvas();
+  </script>
+
+  
 </body>
 </html>
