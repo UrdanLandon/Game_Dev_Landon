@@ -1,1 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mandelbrot Explorer</title>
 
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #000;
+    }
+
+    canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+      cursor: crosshair;
+    }
+
+    #helpText {
+      position: fixed;
+      top: 16px;
+      left: 16px;
+      color: white;
+      font: 13px Arial, sans-serif;
+      opacity: 0.8;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="fractalCanvas"></canvas>
+  <div id="helpText">
+    Scroll to zoom · Drag to select a region · Double-click to reset
+  </div>
+
+  <script>
+    const fractalCanvas = document.getElementById("fractalCanvas");
+const canvasContext = fractalCanvas.getContext("2d");
+
+let canvasWidth = 0;
+let canvasHeight = 0;
+
+let centerReal = -0.5;
+let centerImaginary = 0;
+let viewWidth = 3.5;
+
+let maxIterations = 120;
+
+let isSelecting = false;
+let selectionStartX = 0;
+let selectionStartY = 0;
+let selectionCurrentX = 0;
+let selectionCurrentY = 0;
+  </script>
+</body>
+</html>
