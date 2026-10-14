@@ -18,8 +18,21 @@ Version 0.0.1
 
        <input type=button value=" myEvent squares " onClick="{ 
         let myIn01 = parseFloat(document.getElementById('myNum01').value) 
-        let myAnswer = myIn01 * myIn01
+        var myAnswer = myIn01 * myIn01
         document.getElementById('myDiv01').innerHTML = myIn01 + ' squared = ' + myAnswer
        }"><br>
 
          <div id="myDiv01">...</div>
+
+<h2>Extra:</h2>
+
+
+      <input id="myNum02" type=number value="document.getElementById('myAnswer').value" ><br>
+
+       <input type=button value=" myEvent squares " onClick="{ 
+        let myIn02 = parseFloat(document.getElementById('myNum02').value) 
+        let myDividend = myIn02 * myIn02
+        document.getElementById('myDiv02').innerHTML = myIn02 + ' Unsquared = ' + myDividend
+       }"><br>
+
+         <div id="myDiv02">...</div>
