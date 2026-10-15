@@ -29,7 +29,7 @@ Version 0.0.1
 <h4>Unsquaring the previous anwsers</h4>
 
        <input type=button value=" myEvent squares " onClick="{ 
-        let myIn02 = parseFloat(document.getElementById('myDiv01').value)
+        let myIn02 = parseFloat(document.getElementById('myDiv01').innerHTML)
         let myIn03 = myIn02 * myIn02
         let myDividend = myIn03 / myIn02
         document.getElementById('myDiv02').innerHTML = myMultiple + ' Unsquared = ' + myDividend
