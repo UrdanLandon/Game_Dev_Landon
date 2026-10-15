@@ -29,13 +29,16 @@ Max Array Entry <input type=number
 <br>
 <h4>Idea: Array that repeats every four objects.</h4><br>
 
-Looping Array Entry <input type=number
+Looping Array Entry: <input type=number
  id="myText01" value="3"><br>
+
+Amount of repeats: <input type=number
+ id="myNum01" value="3"><br>
 
  <input type=button value="Repeating Array" onClick="{
     let myTemp = document.getElementById('myText01').value
     let mySum = ' '
-    let myMax = myArray[3]
+    let myMax = myArray[3] * 
     document.getElementById('myDiv01').innerHTML = ' '
 
     myArray = new Array()
@@ -47,8 +50,8 @@ Looping Array Entry <input type=number
     for (let myLoop=0;  myLoop <= myTemp;  myLoop++){
        mySum += 'Loop #: ' + myLoop + ' array entry: ' + myArray[myLoop] +'<br>'
     }
-    if (myTemp = myMax; 
-    document.getElementById('myDiv01').innerHTML = mySum
+    
+    
  }">
 
    <div id="myDiv01">...</div>
