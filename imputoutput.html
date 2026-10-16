@@ -38,7 +38,8 @@ Version 0.0.1
          <div id="myDiv02">...</div>
 
 <input type=button value=" Idea " onClick="{
-        if (myIn04 >= 10){myIn04 = 'This is too low!'}else{myIn04 = parseFloat(document.getElementById('myDiv02').innerHTML)}
+        let myIn04 = parseFloat(document.getElementById('myDiv02').innerHTML)
+        if (myIn04 >= 10){myIn04 = 'This is too low!'}
         document.getElementById('myDiv03').innerHTML = myIn04
        }"><br>
 
