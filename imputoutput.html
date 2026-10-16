@@ -33,13 +33,15 @@ Version 0.0.1
         let myIn03 = myIn02 * myIn02
         let myDividend = myIn03 / myIn02
         document.getElementById('myDiv02').innerHTML = myIn03 + ' Unsquared = ' + myDividend
+        document.getElementById('myDiv02').value = myIn03
        }"><br>
 
-         <div id="myDiv02">...</div>
+         <div id="myDiv02" value=" ">...</div>
 
 <input type=button value=" Idea " onClick="{
         let myIn04 = parseFloat(document.getElementById('myNum01').value)
         if (myIn04 <= 10){myIn04 += ' is too low!'}else{ myIn04 += ' is good enough!'}
+        if (myIn04 >= 100){myIn04 += ' is too high!'}
         document.getElementById('myDiv03').innerHTML = 'The number ' + myIn04
        }"><br>
 
