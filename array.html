@@ -37,8 +37,7 @@ Amount of repeats: <input type=number
 
  <input type=button value="Repeating Array" onClick="{
     let myTemp = document.getElementById('myText01').value
-    let mySum = ' '
-    let myMax = myArray[3] * 
+    let mySum = ' ' 
     document.getElementById('myDiv01').innerHTML = ' '
 
     myArray = new Array()
@@ -50,7 +49,7 @@ Amount of repeats: <input type=number
     for (let myLoop=0;  myLoop <= myTemp;  myLoop++){
        mySum += 'Loop #: ' + myLoop + ' array entry: ' + myArray[myLoop] +'<br>'
     }
-    
+     document.getElementById('myDiv01').innerHTML = mySum
     
  }">
 
