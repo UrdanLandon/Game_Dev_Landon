@@ -36,13 +36,33 @@ Version 0.0.1
         document.getElementById('myDiv02').value = myIn03
        }"><br>
 
-         <div id="myDiv02" value=" ">...</div>
+         <div id="myDiv02" value=" ">...</div><br>
 
-<input type=button value=" Idea " onClick="{
-        let myIn04 = parseFloat(document.getElementById('myNum01').value)
-        if (myIn04 <= 10){myIn04 += ' is too low!'}else{ myIn04 += ' is good enough!'}
+<h2 color = "#880000">Can you find the Secret Password of 10's?</h2>
+
+<input id="myNum02" type=number value="Replace this with any number you can think of" ><br>
+
+<input type=button value=" number puzzle " onClick="{
+        let myIn04 = parseFloat(document.getElementById('myNum02').value)
+        if (myIn04 = 45){myIn04 += ' reveals the password as Pantera'
+        if (myIn04 < 10){myIn04 += ' is too low!'}
+        if (myIn04 = 10){myIn04 += ' needed is 45'}
         if (myIn04 >= 100){myIn04 += ' is too high!'}
+    
         document.getElementById('myDiv03').innerHTML = 'The number ' + myIn04
        }"><br>
 
-<div id="myDiv03">...</div>
+<div id="myDiv03">...</div><br>
+
+
+
+<imput id="myCode" value="Hint: look at the number in the title of this search"><br>
+
+<input type=button value="answer key" onClick="{
+        let myIn05 = parseFloat(document.getElementById('myCode').value)
+        let myReveal = ' '
+        if (myIn05 = Pantera ){myReveal += 'You have found the Secret Password!'}
+        document.getElementById('myDiv04').innerHTML = myReveal
+       }"><br>
+
+    <div id="myDiv04">
