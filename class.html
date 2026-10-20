@@ -17,11 +17,11 @@ Nothing: <input type=text id="myText01" value="Useless at the moment"><br>
         document.getElementById('myDiv01').innnerHTML = 'Hello' + this.myName + '. You are '
           + this.myAge + ' years old<br>'
         }
-  } destroy() {
-      this.myName = null
-      this.myAge = null
-       consoleLog('class dismissed')
-  }
+  }   setTimeout(() {
+      this.destroy();
+      myName = null;
+      myAge = null;
+     },3000;)
   
      myDog = new myAnimal('Snickers', 5)
      myDog.myShow()
