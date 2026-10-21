@@ -7,12 +7,13 @@
     }
     myShow(){
        document.getElementById('myDiv01').innerHTML = 'Hello '+ this.myName+'<br>'
-    }
-  }
-      destroy(){
+    }  destroy(){
         this.data = null;
       }
-       myAnimal.destroy()
+  }
+      let instance = new myAnimal('Hello')
+
+      instance.destroy()
   
 </script>
 
