@@ -7,13 +7,14 @@
     }
     myShow(){
        document.getElementById('myDiv01').innerHTML = 'Hello '+ this.myName+'<br>'
-    }  destroy(){
+    }  
+        destroy(){
         this.data = null;
       }
   }
       let instance = new myAnimal('Hello')
 
-      instance.destroy()
+      instance.destroy();
   
 </script>
 
@@ -39,12 +40,17 @@ Nothing: <input type=text id="myText01" value="Useless at the moment"><br>
 
      myShow(){
        document.getElementById('myDiv01').innerHTML = this.myName + ' is a great cat<br>'
+      } 
+    destroy(){
+        this.data = null;
       }
   }
-       myCat.destroy()
+       let twinstance = new myCat('Hyllo')
+  
+        twinstance.destroy();
 
       let myPet = new myCat('Fluffy',14)
-      myPet.myShow()
+      myPet.myShow();
 
 }">
 
