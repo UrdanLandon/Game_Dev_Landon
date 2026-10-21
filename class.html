@@ -18,11 +18,10 @@ Nothing: <input type=text id="myText01" value="Useless at the moment"><br>
           + this.myAge + ' years old<br>'
         }
   }   
-       setTimeout(() {
-       this.destroy();
-       myName = null;
-       myAge = null;
-       },3000;)
+       
+       destroy(){
+       this.data = null;
+       }
   
      myDog = new myAnimal('Snickers', 5)
      myDog.myShow()
