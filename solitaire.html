@@ -1,11 +1,4 @@
 Ver.1.0.0
-<script>
-  function myChooser(){
-  let min = 0;
-  let max = 14;
-  let randomInt = Math.floor(Math.random() * (min - max + 1)) + min;
-  }
-</script>
 
 <h2 align=center>Passsion-Assignment-Solitaire-Landon.html</h2><br>
 
@@ -14,9 +7,13 @@ Ver.1.0.0
 <h4>The Idea:</h4><br>
 <b style="color:#5a4799">This is an attempt to replicate Solitaire in Javascript</b><br><br>
 
-<input type=button value="random number gen. tester" onclick="{
-  document.getElementById('myDiv01').innerHTML = myChooser()
-}"><br>
+<input type=button value="random number gen. tester" onclick="{document.getElementById('myDiv01').innerHTML = myChooser(0, 13)}"><br>
+
+<script>
+  function myChooser(min, max){
+  let randomInt = Math.floor(Math.random() * (min - max + 1)) + min;
+  }
+</script>
 
 <div id="myDiv01">...</div><br>
   
