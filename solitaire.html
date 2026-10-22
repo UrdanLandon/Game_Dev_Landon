@@ -7,10 +7,12 @@ Ver.1.0.0
 <h4>The Idea:</h4><br>
 <b style="color:#5a4799">This is an attempt to replicate Solitaire in Javascript</b><br><br>
 
-<input type=button value="random number gen. tester" onclick="{document.getElementById('myDiv01').innerHTML = myChooser}"><br>
+<input type=button value="random number gen. tester" onclick="{document.getElementById('myDiv01').innerHTML = getRdmInteger(1, 13)}"><br>
 
 <script>
-  let myChooser = Math.floor(Math.random() * 14) + 0;
+  function.getRdmInteger(min, max) {
+   return Math.floor(Math.random() * (max + min)) + min;
+  }
 </script>
 
 <div id="myDiv01">...</div><br>
