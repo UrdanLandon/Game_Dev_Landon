@@ -26,12 +26,9 @@ Textarea:<br>
 <textarea id= "myArea01" cols= "30"  rows= "5">Cool this works</textarea><br>
 
 Select Box:<br>
-<select id = "mySelect01" size="2" onchange = "{
-  document.getElementById('myArea01').innerHTML +=
-document.getElementById('myselect01').value
-}">
-<option value='myDog'> Dog
-<option value='myCat'> Cat
-<option value='myMouse'> Mouse
+<select id = "mySelect01" size="2">
+<option value='myDog' onclick = "{document.getElementById('myArea01').innerHTML += document.getElementById('myDog').innerHTML}"> Dog
+<option value='myCat' onclick = "{document.getElementById('myArea01').innerHTML += document.getElementById('myCat').innerHTML}"> Cat
+<option value='myMouse' onclick = "{document.getElementById('myArea01').innerHTML += document.getElementById('myMouse').innerHTML}"> Mouse
 </select>
 </form>
