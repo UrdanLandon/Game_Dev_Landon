@@ -14,9 +14,8 @@ let myHero = {
 
 // STEP 2: Write a function named `trainHero()` that reduces power and checks comments
 function trainHero(){
-  let myStrain = 10
-  let myPower = myHero.power
-  myPower - myStrain
+  
+  let myStrain = myHero.power - 10
   return myPower
   if (myHero.power < 80){myHero.comment = " is in high spirits; High power "}
   else if (myHero.power > 80 && myHero.power >= 50){myHero.comment = " is Feeling the burn; medium power "}
@@ -24,8 +23,11 @@ function trainHero(){
 
    alert() {myHero.comment = myHero.name + "Has fainted, and taken a break! Continue as usual."}
 
-if (myHero.power =< 0){trainHero.alert() && myHero.power = 100}
-  
+if (myHero.power =< 0)
+{alert();
+ myHero.power = 100;
+   }
+}
    // Write your code here:
    // - Subtract 10 from myHero.power
    // - Use if / else if / else statements to change myHero.comment based on myHero.power
@@ -33,8 +35,6 @@ if (myHero.power =< 0){trainHero.alert() && myHero.power = 100}
    //     1. Show an alert() warning the user
    //     2. Set myHero.comment to a faint/reset message
    //     3. Reset myHero.power back to 100
-   
-}
 
 </script>
 </head>
