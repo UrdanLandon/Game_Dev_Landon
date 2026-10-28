@@ -11,19 +11,20 @@ let myHero = {
 };
 
 function trainHero(){
-  let myStrain = myHero.power - 10
-  if (myHero.power < 80){myHero.comment = " is in high spirits; High power "}
-  else if (myHero.power > 80 && myHero.power >= 50){myHero.comment = " is Feeling the burn; medium power "}
-  else {myHero.comment = " is very much in need of a break; Low power "}
+  let myStrain = this.power - 10
+  if (this.power < 80){this.comment = " is in high spirits; High power "}
+  else if (this.power > 80 && this.power >= 50){this.comment = " is Feeling the burn; medium power "}
+  else {this.comment = " is very much in need of a break; Low power "}
    
-   alert() {myHero.comment = "Has fainted, and taken a break! Continue as usual."}
+   alert() {this.comment = "Has fainted, and taken a break! Continue as usual."}
 
-if (myHero.power =< 0)
+if (this.power =< 0)
 {power.alert();
- myHero.power = 100;
+ this.power = 100;
    };
    
-document.getElementById('myDiv01').innerHTML = 'The Input was ' + myStrain + '<br>' + myHero.name + myHero.comment;
+document.getElementById('myDiv01').innerHTML = 'The Input was ' + myStrain + '<br>' + this.name + this.comment;
+   return mystrain
 }
 
 </script>
