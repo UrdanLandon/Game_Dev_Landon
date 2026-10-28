@@ -61,6 +61,7 @@ Student Name| Landon Mugford, Date| 27/10/2026, Assignment Title: Stateful Objec
 </fieldset>
 
 <input type=button value="Train Hero (-10 Power)" onclick="{
-   document.getElementById('myDiv01').innerHTML = trainHero()}"><br><br>
+        trainHero();
+   document.getElementById('myDiv01').innerHTML = 'The Input was ' + myHero.power + myHero.name + myHero.comment }"><br><br>
 
 <div id="myDiv01">Click the button above to begin training! Initial Power: 100</div>
