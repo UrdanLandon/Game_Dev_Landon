@@ -4,19 +4,15 @@ Version 1.0.0
 <script> 
 <!-- All functions go here -->
 
-// STEP 1: Define a global object named `myHero`
-// Properties needed: name (string), power (number, starting at 100), comment (string)
 let myHero = {
    name: 'Captain Code',
    power: 100,
    comment: 'Ready for training!'
 };
 
-// STEP 2: Write a function named `trainHero()` that reduces power and checks comments
 function trainHero(){
-  
   let myStrain = myHero.power - 10
-  return myPower
+  return myStrain
   if (myHero.power < 80){myHero.comment = " is in high spirits; High power "}
   else if (myHero.power > 80 && myHero.power >= 50){myHero.comment = " is Feeling the burn; medium power "}
   else {myHero.comment = " is very much in need of a break; Low power "}
@@ -28,6 +24,15 @@ if (myHero.power =< 0)
  myHero.power = 100;
    }
 }
+
+</script>
+</head>
+<p> 
+   // STEP 1: Define a global object named `myHero`
+   // Properties needed: name (string), power (number, starting at 100), comment (string)
+   
+   // STEP 2: Write a function named `trainHero()` that reduces power and checks comments 
+
    // Write your code here:
    // - Subtract 10 from myHero.power
    // - Use if / else if / else statements to change myHero.comment based on myHero.power
@@ -35,9 +40,12 @@ if (myHero.power =< 0)
    //     1. Show an alert() warning the user
    //     2. Set myHero.comment to a faint/reset message
    //     3. Reset myHero.power back to 100
-
-</script>
-</head>
+   
+   // STEP 3: Call your trainHero() function here
+   
+   // STEP 4: Output the updated hero object details into myDiv01
+   // (Display Hero Name, Remaining Power, and Coach's Comment)
+</p>
 
 <h2 align=center>Stateful Hero Energy Tracker</h2>
 Student Name| Landon Mugford, Date| 27/10/2026, Assignment Title: Stateful Object Assignment <br><br> 
@@ -54,9 +62,6 @@ Student Name| Landon Mugford, Date| 27/10/2026, Assignment Title: Stateful Objec
 
 <input type=button value="Train Hero (-10 Power)" onclick="{
       trainHero();
-   // STEP 3: Call your trainHero() function here
-   // STEP 4: Output the updated hero object details into myDiv01
-   // (Display Hero Name, Remaining Power, and Coach's Comment)
    document.getElementById('myDiv01').innerHTML = 'The Input was ' + myHero.power + '<br>'
    document.getElementById('myDiv01').innerHTML += myHero.name + myHero.comment
 }"><br><br>
