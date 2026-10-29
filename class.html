@@ -16,18 +16,18 @@ Nothing: <input type=text id="myText01" value="Useless at the moment"><br>
      myShow(){
         document.getElementById('myDiv01').innerHTML = 'Hello' + this.myName + '. You are ' + this.myAge + ' years old<br>'
         }
-  }
-          destroy(){
+           destroy(){
           this.data = null;
        }
+  }
            
      let instance = new myAnimal('Hello')
   
      instance.destroy();
 
      myDog = new myAnimal('Snickers', 5)
-     myAnimal.myShow()
-     }
+     myAnimal.myShow();
+     
   }"><br>
 
   <div id="myDiv01">...</div>
