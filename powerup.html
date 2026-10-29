@@ -16,11 +16,13 @@ let myHero = {
 
 function trainHero(){
   let myStrain = this.power - 10 ;
+  return myStrain
+  let myReply = myStrain + this.name + this.comment
   if (myStrain < 80){this.comment = " is in high spirits; High power "};
   else if (myStrain > 80 && myStrain >= 50){this.comment = " is Feeling the burn; medium power "};
   else {this.comment = " is very much in need of a break; Low power "};
-  if (myStrain =< 0){alert(); myStrain = 100};
-   return myStrain;
+  if (myStrain =< 0){alert(); myStrain = 100;}
+   return myReply
 };
 
 </script>
@@ -59,9 +61,9 @@ Student Name| Landon Mugford, Date| 27/10/2026, Assignment Title: Stateful Objec
 </fieldset>
 
 <input type=button value="Train Hero (-10 Power)" onclick="{
-        trainHero()
+        trainHero();
       let myObj = Object.fromEntries(myHero)
-   document.getElementById('myDiv01').innerHTML = 'The Input was ' + myObj.power + myObj.name + myObj.comment
+   document.getElementById('myDiv01').innerHTML = 'The Input was ' + myReply
 }"><br><br>
 
 <div id="myDiv01">Click the button above to begin training! Initial Power: 100</div>
