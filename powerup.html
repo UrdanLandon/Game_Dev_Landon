@@ -23,11 +23,7 @@ function trainHero(){
 } else {this.comment = " is very much in need of a break; Low power "};
   if (this.power <= 0){alert(); this.power = 100;}
    };
-   function myShow(){
-      let myReply = this.power + this.name + this.comment
-       return myReply
-   };
-
+   
 </script>
 </head>
 <p> 
@@ -64,6 +60,11 @@ Student Name| Landon Mugford, Date| 27/10/2026, Assignment Title: Stateful Objec
 </fieldset>
 
 <input type=button value="Train Hero (-10 Power)" onclick="{
+   function myShow(){
+      let myReply = this.power + this.name + this.comment
+       return myReply
+   };
+
    document.getElementById('myDiv01').innerHTML = 'The Input was ' + myShow();
 }"><br><br>
 
