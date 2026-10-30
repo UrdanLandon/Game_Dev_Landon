@@ -17,12 +17,11 @@ let myHero = {
     };
 
 function trainHero(){
-  let myStrain = this.power - 10
-  return myStrain
+  this.power - 10
   if (this.power < 80){this.comment = " is in high spirits; High power "};
   else if (this.power > 80 && this.power >= 50){this.comment = " is Feeling the burn; medium power "};
   else {this.comment = " is very much in need of a break; Low power "};
-  if (this.power =< 0){alert(); this.power = 100;}
+  if (this.power <= 0){alert(); this.power = 100;}
    
 };
    function myShow(){
