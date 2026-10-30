@@ -14,16 +14,16 @@ let myHero = {
 
     function alert()  {
        this.comment = "Has fainted, and taken a break! Continue as usual."
+       return this.comment
     };
 
 function trainHero(){
-  this.power - 10
+  let myStrain = this.power - 10
   if (this.power < 80){this.comment == " is in high spirits; High power ";
 } else if (this.power > 80 && this.power >= 50){this.comment = " is Feeling the burn; medium power ";
 } else {this.comment = " is very much in need of a break; Low power "};
   if (this.power <= 0){alert(); this.power = 100;}
-   this.power + this.name + this.comment
-       return this.power + this.name + this.comment
+       return myStrain + this.name + this.comment
    };
    
 </script>
