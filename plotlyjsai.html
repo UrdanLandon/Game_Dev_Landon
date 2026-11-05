@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>t1a15 — Strange Attractors</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+  <style>
+    :root {
+      --bg: #0b1420;
+      --panel: #122033;
+      --ink: #e8f0f8;
+      --muted: #8aa0b8;
+      --accent: #3dd6c6;
+      --accent-2: #f0a35e;
+      --line: rgba(232, 240, 248, 0.12);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Segoe UI", "Helvetica Neue", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(1200px 600px at 10% -10%, #1a3a4a 0%, transparent 55%),
+        radial-gradient(900px 500px at 100% 0%, #2a1f18 0%, transparent 50%),
+        var(--bg);
+    }
+
+    header {
+      padding: 2rem 1.5rem 1rem;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0 0 0.35rem;
+      font-weight: 650;
+      letter-spacing: -0.02em;
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+    }
+
+    header p {
+      margin: 0 auto;
+      max-width: 36rem;
+      color: var(--muted);
+      line-height: 1.45;
+      font-size: 0.98rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.25rem;
+      padding: 1rem 1.25rem 2.5rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .panel {
+      background: rgba(18, 32, 51, 0.88);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      overflow: hidden;
+    }
+
+    .panel-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      padding: 0.9rem 1rem;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .panel-head h2 {
+      margin: 0;
+      font-size: 1rem;
+      font-weight: 600;
+    }
+
+    .panel-head span {
+      color: var(--muted);
+      font-size: 0.78rem;
+    }
+
+    .stage {
+      position: relative;
+      width: 100%;
+      height: 360px;
+      background: #071018;
+    }
+
+    #plotlyStage,
+    #threeStage {
+      width: 100%;
+      height: 100%;
+    }
+
+    #threeStage canvas {
+      display: block;
+      width: 100% !important;
+      height: 100% !important;
+      cursor: grab;
+    }
+
+    #threeStage canvas:active { cursor: grabbing; }
+
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      padding: 0.85rem 1rem 1rem;
+      border-top: 1px solid var(--line);
+    }
+
+    button {
+      appearance: none;
+      border: 1px solid var(--line);
+      background: #183049;
+      color: var(--ink);
+      border-radius: 8px;
+      padding: 0.45rem 0.85rem;
+      font: inherit;
+      font-size: 0.88rem;
+      cursor: pointer;
+      transition: background 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
+    }
+
+    button:hover {
+      background: #214060;
+      border-color: rgba(61, 214, 198, 0.45);
+    }
+
+    button:active { transform: translateY(1px); }
+
+    button.primary {
+      background: #1a4a48;
+      border-color: rgba(61, 214, 198, 0.55);
+      color: #d8fff9;
+    }
+
+    button.warm {
+      background: #4a3520;
+      border-color: rgba(240, 163, 94, 0.5);
+      color: #ffe8d2;
+    }
+
+    .hint {
+      margin: 0;
+      padding: 0 1rem 1rem;
+      color: var(--muted);
+      font-size: 0.8rem;
+      line-height: 1.4;
+    }
+
+    footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.75rem;
+      padding-bottom: 1.5rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Strange Attractors</h1>
+    <p>
+      Two classic libraries, one idea: chaotic systems that never settle.
+      Plotly traces the Lorenz butterfly; Three.js grows a glowing particle trail in 3D.
+    </p>
+  </header>
+
+  <div class="grid">
+    <section class="panel">
+      <div class="panel-head">
+        <h2>Plotly — Lorenz attractor</h2>
+        <span>dx/dt chaos in 2D</span>
+      </div>
+      <div class="stage">
+        <div id="plotlyStage"></div>
+      </div>
+      <div class="controls">
+        <button class="primary" id="plotlyToggle" type="button">Pause</button>
+        <button id="plotlyReset" type="button">Reset trail</button>
+        <button id="plotlySpeed" type="button">Speed: normal</button>
+      </div>
+      <p class="hint">
+        The teal path is one continuous trajectory folding through phase space into the butterfly.
+        Drag to pan, scroll to zoom.
+      </p>
+    </section>
+
+    <section class="panel">
+      <div class="panel-head">
+        <h2>Three.js — particle orbit</h2>
+        <span>same equations, live 3D</span>
+      </div>
+      <div class="stage">
+        <div id="threeStage"></div>
+      </div>
+      <div class="controls">
+        <button class="warm" id="threeToggle" type="button">Pause</button>
+        <button id="threeClear" type="button">Clear trail</button>
+        <button id="threeSpin" type="button">Auto-spin: on</button>
+      </div>
+      <p class="hint">
+        Drag to orbit the camera. Each frame adds a glowing point along the same Lorenz path.
+      </p>
+    </section>
+  </div>
+
+  <footer>Improved duplicate of t1a15-threejs-plotly-fred.html — original left untouched.</footer>
+
+  <script>
+    // Shared Lorenz attractor (σ=10, ρ=28, β=8/3)
+    const SIGMA = 10;
+    const RHO = 28;
+    const BETA = 8 / 3;
+    const DT = 0.008;
+
+    function stepLorenz(state) {
+      const { x, y, z } = state;
+      state.x += SIGMA * (y - x) * DT;
+      state.y += (x * (RHO - z) - y) * DT;
+      state.z += (x * y - BETA * z) * DT;
+      return state;
+    }
+
+    // ---------- Plotly: animated x–z projection ----------
+    const plotlyEl = document.getElementById('plotlyStage');
+    const plotState = { x: 0.1, y: 0, z: 0 };
+    const MAX_PLOT = 2200;
+    let plotRunning = true;
+    let plotStepsPerFrame = 8;
+    let plotSpeedMode = 1;
+    let plotBusy = false;
+    let lastPlotMs = 0;
+
+    const plotLayout = {
+      margin: { t: 24, b: 40, l: 44, r: 16 },
+      paper_bgcolor: 'transparent',
+      plot_bgcolor: 'rgba(7,16,24,0.6)',
+      xaxis: {
+        title: { text: 'x', font: { color: '#8aa0b8', size: 11 } },
+        color: '#8aa0b8',
+        gridcolor: 'rgba(138,160,184,0.12)',
+        zeroline: false,
+        range: [-22, 22],
+        autorange: false
+      },
+      yaxis: {
+        title: { text: 'z', font: { color: '#8aa0b8', size: 11 } },
+        color: '#8aa0b8',
+        gridcolor: 'rgba(138,160,184,0.12)',
+        zeroline: false,
+        range: [0, 52],
+        autorange: false
+      },
+      font: { color: '#e8f0f8' },
+      showlegend: false
+    };
+
+    // Seed with the first point so the line has a valid start
+    Plotly.newPlot(
+      plotlyEl,
+      [{
+        x: [plotState.x],
+        y: [plotState.z],
+        type: 'scatter',
+        mode: 'lines',
+        line: { color: '#3dd6c6', width: 1.8 },
+        hoverinfo: 'skip'
+      }],
+      plotLayout,
+      { responsive: true, displayModeBar: false }
+    );
+
+    function tickPlotly(now) {
+      if (plotRunning && !plotBusy && now - lastPlotMs >= 40) {
+        const xs = [];
+        const zs = [];
+        for (let i = 0; i < plotStepsPerFrame; i++) {
+          stepLorenz(plotState);
+          xs.push(plotState.x);
+          zs.push(plotState.z);
+        }
+        plotBusy = true;
+        lastPlotMs = now;
+        // extendTraces is built for live streams; 4th arg caps trail length
+        Plotly.extendTraces(plotlyEl, { x: [xs], y: [zs] }, [0], MAX_PLOT)
+          .then(() => { plotBusy = false; })
+          .catch(() => { plotBusy = false; });
+      }
+      requestAnimationFrame(tickPlotly);
+    }
+    requestAnimationFrame(tickPlotly);
+
+    document.getElementById('plotlyToggle').addEventListener('click', (e) => {
+      plotRunning = !plotRunning;
+      e.target.textContent = plotRunning ? 'Pause' : 'Resume';
+    });
+
+    document.getElementById('plotlyReset').addEventListener('click', () => {
+      Object.assign(plotState, { x: 0.1, y: 0, z: 0 });
+      plotBusy = true;
+      Plotly.react(
+        plotlyEl,
+        [{
+          x: [plotState.x],
+          y: [plotState.z],
+          type: 'scatter',
+          mode: 'lines',
+          line: { color: '#3dd6c6', width: 1.8 },
+          hoverinfo: 'skip'
+        }],
+        plotLayout,
+        { responsive: true, displayModeBar: false }
+      ).then(() => { plotBusy = false; })
+        .catch(() => { plotBusy = false; });
+    });
+
+    document.getElementById('plotlySpeed').addEventListener('click', (e) => {
+      plotSpeedMode = (plotSpeedMode + 1) % 3;
+      const modes = [
+        { label: 'Speed: slow', steps: 3 },
+        { label: 'Speed: normal', steps: 8 },
+        { label: 'Speed: fast', steps: 18 }
+      ];
+      e.target.textContent = modes[plotSpeedMode].label;
+      plotStepsPerFrame = modes[plotSpeedMode].steps;
+    });
+
+    // ---------- Three.js: 3D particle trail ----------
+    const threeHost = document.getElementById('threeStage');
+    const scene = new THREE.Scene();
+    scene.fog = new THREE.FogExp2(0x071018, 0.018);
+
+    const camera = new THREE.PerspectiveCamera(
+      55,
+      threeHost.clientWidth / Math.max(threeHost.clientHeight, 1),
+      0.1,
+      200
+    );
+    camera.position.set(0, 18, 55);
+
+    const renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    renderer.setSize(threeHost.clientWidth, threeHost.clientHeight);
+    renderer.setClearColor(0x071018, 1);
+    threeHost.appendChild(renderer.domElement);
+
+    scene.add(new THREE.AmbientLight(0x6688aa, 0.55));
+    const key = new THREE.PointLight(0x3dd6c6, 1.1, 120);
+    key.position.set(20, 30, 40);
+    scene.add(key);
+    const fill = new THREE.PointLight(0xf0a35e, 0.7, 100);
+    fill.position.set(-25, -10, 20);
+    scene.add(fill);
+
+    // Dim axes for orientation
+    const axes = new THREE.AxesHelper(8);
+    axes.position.set(-22, -18, -10);
+    scene.add(axes);
+
+    const MAX_POINTS = 4000;
+    const positions = new Float32Array(MAX_POINTS * 3);
+    const colors = new Float32Array(MAX_POINTS * 3);
+    const geometry = new THREE.BufferGeometry();
+    geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+    geometry.setDrawRange(0, 0);
+
+    const material = new THREE.PointsMaterial({
+      size: 0.55,
+      vertexColors: true,
+      transparent: true,
+      opacity: 0.95,
+      depthWrite: false,
+      blending: THREE.AdditiveBlending,
+      sizeAttenuation: true
+    });
+
+    const cloud = new THREE.Points(geometry, material);
+    scene.add(cloud);
+
+    // Bright “head” marker that rides the attractor
+    const head = new THREE.Mesh(
+      new THREE.SphereGeometry(0.55, 16, 16),
+      new THREE.MeshBasicMaterial({ color: 0xffe6c8 })
+    );
+    scene.add(head);
+
+    const threeState = { x: 0.1, y: 0, z: 0 };
+    let pointCount = 0;
+    let threeRunning = true;
+    let autoSpin = true;
+
+    // Simple drag-to-orbit
+    let isDragging = false;
+    let prevX = 0;
+    let prevY = 0;
+    let theta = 0.35;
+    let phi = 1.15;
+    const radius = 58;
+
+    function placeCamera() {
+      camera.position.x = radius * Math.sin(phi) * Math.sin(theta);
+      camera.position.y = radius * Math.cos(phi);
+      camera.position.z = radius * Math.sin(phi) * Math.cos(theta);
+      camera.lookAt(0, 0, 0);
+    }
+    placeCamera();
+
+    renderer.domElement.addEventListener('pointerdown', (e) => {
+      isDragging = true;
+      prevX = e.clientX;
+      prevY = e.clientY;
+      renderer.domElement.setPointerCapture(e.pointerId);
+    });
+    renderer.domElement.addEventListener('pointerup', (e) => {
+      isDragging = false;
+      renderer.domElement.releasePointerCapture(e.pointerId);
+    });
+    renderer.domElement.addEventListener('pointermove', (e) => {
+      if (!isDragging) return;
+      const dx = e.clientX - prevX;
+      const dy = e.clientY - prevY;
+      prevX = e.clientX;
+      prevY = e.clientY;
+      theta -= dx * 0.008;
+      phi = Math.min(Math.max(phi - dy * 0.008, 0.2), Math.PI - 0.2);
+      placeCamera();
+    });
+
+    function colorForIndex(i, total) {
+      const t = total <= 1 ? 1 : i / (total - 1);
+      // teal → sky → orange
+      if (t < 0.5) {
+        const u = t / 0.5;
+        return {
+          r: 0.24 + u * (0.49 - 0.24),
+          g: 0.84 + u * (0.78 - 0.84),
+          b: 0.78 + u * (0.89 - 0.78)
+        };
+      }
+      const u = (t - 0.5) / 0.5;
+      return {
+        r: 0.49 + u * (0.94 - 0.49),
+        g: 0.78 + u * (0.64 - 0.78),
+        b: 0.89 + u * (0.37 - 0.89)
+      };
+    }
+
+    function addPoint(x, y, z) {
+      // Scale & center Lorenz coordinates into view
+      const sx = x * 0.85;
+      const sy = (z - 25) * 0.85;
+      const sz = y * 0.85;
+
+      const i = pointCount % MAX_POINTS;
+      positions[i * 3] = sx;
+      positions[i * 3 + 1] = sy;
+      positions[i * 3 + 2] = sz;
+
+      pointCount++;
+      const drawCount = Math.min(pointCount, MAX_POINTS);
+      geometry.setDrawRange(0, drawCount);
+
+      // Refresh gradient across visible trail
+      for (let j = 0; j < drawCount; j++) {
+        const c = colorForIndex(j, drawCount);
+        colors[j * 3] = c.r;
+        colors[j * 3 + 1] = c.g;
+        colors[j * 3 + 2] = c.b;
+      }
+
+      geometry.attributes.position.needsUpdate = true;
+      geometry.attributes.color.needsUpdate = true;
+      head.position.set(sx, sy, sz);
+    }
+
+    function animateThree() {
+      if (threeRunning) {
+        for (let n = 0; n < 4; n++) {
+          stepLorenz(threeState);
+          addPoint(threeState.x, threeState.y, threeState.z);
+        }
+      }
+      if (autoSpin && !isDragging) {
+        theta += 0.0035;
+        placeCamera();
+      }
+      renderer.render(scene, camera);
+      requestAnimationFrame(animateThree);
+    }
+    requestAnimationFrame(animateThree);
+
+    document.getElementById('threeToggle').addEventListener('click', (e) => {
+      threeRunning = !threeRunning;
+      e.target.textContent = threeRunning ? 'Pause' : 'Resume';
+    });
+
+    document.getElementById('threeClear').addEventListener('click', () => {
+      pointCount = 0;
+      geometry.setDrawRange(0, 0);
+      Object.assign(threeState, { x: 0.1, y: 0, z: 0 });
+      head.position.set(0, 0, 0);
+    });
+
+    document.getElementById('threeSpin').addEventListener('click', (e) => {
+      autoSpin = !autoSpin;
+      e.target.textContent = autoSpin ? 'Auto-spin: on' : 'Auto-spin: off';
+    });
+
+    function onResize() {
+      const w = threeHost.clientWidth;
+      const h = threeHost.clientHeight;
+      camera.aspect = w / Math.max(h, 1);
+      camera.updateProjectionMatrix();
+      renderer.setSize(w, h);
+      Plotly.Plots.resize(plotlyEl);
+    }
+    window.addEventListener('resize', onResize);
+  </script>
+</body>
+</html>
