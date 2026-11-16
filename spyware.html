@@ -3,15 +3,15 @@
 
 
 <input type=button value="encrypt" onclick="{
-   let myTemp = ' '
-   myString = document.getElementById('myArea01').value.toLowerCase().split(' ')
-  for (let myLoop=0;  myLoop < myString.length;  myLoop++)[
+   let myTemp = ''
+   myString = document.getElementById('myArea01').value.toLowerCase().split('')
+  for (let myLoop=0;  myLoop < myString.length;  myLoop++){
      myTemp = myString[myLoop]
      if (myString[myLoop] == 'e') {myTemp  = 'f'}
      if (mystring[myLoop] == 'h') {myTemp  = 'i'}
      myString[myLoop] = myTemp
   }
-  document.getElementById('myArea02').value = myString.join(' ')
+  document.getElementById('myArea02').value = myString.join('')
 }"><br><br>
 
 
