@@ -3,14 +3,14 @@ Click the button to draw basic shapes, then ask AI to help you add more!<br><br>
 
 <input type=button value="Draw Basic Shapes" onclick="{
   //1. Clear the canvas first so shapes don't overlap when cicked twice
-  myContext.clearRect(0,0, myCanvas.width, myCanvas.height);
+  myContext.clearRect(0, 0, myCanvas.width, myCanvas.height);
 
   //2. Draw a simple Line
   myContext.beginPath();
   myContext.lineWidth = 3;
   myContext.strokeStyle = 'black';
   myContext.moveTo(20, 20);       // Start point (x,y)
-  myContext.lineTo(150, 20);      //End point (x,y)
+  myContext.lineTo(150, 20);      // End point (x,y)
   myContext.stroke();
 
   // 3. Draw a solid Rectangle
