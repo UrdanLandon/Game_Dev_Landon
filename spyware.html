@@ -4,7 +4,7 @@
 
 <input type=button value="encrypt" onclick="{
    let myTemp = ''
-   myString = document.getElementById('myArea01').innerHTML.toLowerCase().split('')
+   myString = document.getElementById('myArea01').value.toLowerCase().split('')
    for (let myLoop=0;  myLoop < myString.length;  myLoop++){
       myTemp = myString[myLoop]
       if (myString[myLoop] == 'e') {myTemp  = 'f'}
@@ -18,7 +18,15 @@
 <textarea id="myArea02" rows=4 cols=70></textarea><br>
 
 <input type=button value="decrypt" onclick="{
-   alert('Sorry, but you have to do this!')
+   let myFix = ''
+   myCoil = document.getElementById('myArea02').value.toLowerCase().split('')
+   for (let myLoop=0; myLoop < myCoil.length;  myLoop++){
+      myFix = myCoil[myLoop]
+      if (myCoil[myLoop] == 'e') {myFix  = 'f'}
+      if (myCoil[myLoop] == 'h') {myFix  = 'i'}
+      myCoil[myLoop] = myFix
+   }
+   document.getElementById('myArea03').value = myCoil.join('')
   }"><br><br>
 
 
