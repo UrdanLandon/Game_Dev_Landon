@@ -19,7 +19,7 @@
 
 <input type=button value="decrypt" onclick="{
    let myFix = ''
-   myCoil = document.getElementById('myArea02').value.toLowerCase().split('')
+   myCoil = document.getElementById('myArea02').value.split('')
    for (let myLoop=0; myLoop < myCoil.length;  myLoop++){
       myFix = myCoil[myLoop]
       if (myCoil[myLoop] == 'f') {myFix  = 'e'}
