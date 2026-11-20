@@ -22,8 +22,8 @@
    myCoil = document.getElementById('myArea02').value.toLowerCase().split('')
    for (let myLoop=0; myLoop < myCoil.length;  myLoop++){
       myFix = myCoil[myLoop]
-      if (myCoil[myLoop] == 'e') {myFix  = 'f'}
-      if (myCoil[myLoop] == 'h') {myFix  = 'i'}
+      if (myCoil[myLoop] == 'f') {myFix  = 'e'}
+      if (myCoil[myLoop] == 'i') {myFix  = 'h'}
       myCoil[myLoop] = myFix
    }
    document.getElementById('myArea03').value = myCoil.join('')
