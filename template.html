@@ -35,8 +35,8 @@ function myCheckHit(){
        document.getElementById('myImg01').style.left = '20px'
        location = 't2a13-keydown.html'  
    }
-   if ( myHitOther('myImg01','myImg02') ){console.log('it works!');}
-
+   if ( myHitOther('myImg01','myImg03') ){alert('Are you sure you want to continue?')}
+   if ( myHitOther('myImg01','myImg04') ){alert('This will be reversible!')}
    // more if statements here like the above
 
 
@@ -48,6 +48,8 @@ function myCheckHit(){
 
 <img id="myImg01" style="position:absolute; width:100px; height:80px; top:0px; left:50px;"  src="myImage01.jpg">
 <img id="myImg02" style="position:absolute; width:100px; height:80px; top:0px; left:250px;" src="myImage02.jpg">
+<img id="myImg03" style="position:absolute; width:10px; height:40px; top:0px; left:100px;" src="myImage03.jpg">
+<img id="myImg04" style="position:absolute; width:10px; height:40px; top:0px; left:200px;" src="myImage04.jpg">
 
 <input type=button value="Auto Background Left" onclick="{
   clearInterval(myClock)
