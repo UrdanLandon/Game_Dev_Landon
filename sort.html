@@ -23,7 +23,7 @@
   let myTemp = 0
   for ( let myLoop = 0;   myLoop < myMax;  myLoop++){
      myCards[myLoop] = 0; myCards.sort(function(a, b){return a - b}); 
-     myTemp += myLoop + ' = '+ myCards + '<br>'
+     myTemp += myLoop + ' = '+ myCards[myLoop] + '<br>'
   }
    document.getElementById('myDiv01').innerHTML = myTemp
    // you do this stuff
