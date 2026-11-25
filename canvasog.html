@@ -39,6 +39,122 @@ Click the button to draw basic shapes, then ask AI to help you add more!<br><br>
   let myContext = myCanvas.getContext('2d');
 </script>
 
+<h2>Ai assissted:</h2>
+
+<p> The following features were added by Chatgpt, directly pasted from the prompts reply with slight modification(in brackets):<br>
+Draw Basic Shapes: Keeps (the) original line, rectangle, circle, and text.<br>
+
+Draw More Shapes: Adds a triangle, star, and another rectangle.<br>
+
+Random Colours: Generates shapes using random colours.<br>
+
+Clear Canvas: Clears everything off the canvas.<br>
+
+Change Background: Changes the canvas background colour.<br>
+
+Draw a Smiley Face: Adds a smiley face.<br>
+
+Canvas Border: Keeps (the) original border.<br>
+</p>
+
+<!-- NEW: More Shapes button -->
+<input type="button" value="Draw More Shapes" onclick="{
+  // Triangle
+  myContext.beginPath();
+  myContext.fillStyle = 'orange';
+  myContext.moveTo(350, 30);
+  myContext.lineTo(300, 120);
+  myContext.lineTo(400, 120);
+  myContext.closePath();
+  myContext.fill();
+
+  // Star
+  myContext.beginPath();
+  myContext.fillStyle = 'gold';
+  myContext.moveTo(250, 160);
+  myContext.lineTo(265, 195);
+  myContext.lineTo(300, 195);
+  myContext.lineTo(273, 218);
+  myContext.lineTo(285, 255);
+  myContext.lineTo(250, 233);
+  myContext.lineTo(215, 255);
+  myContext.lineTo(227, 218);
+  myContext.lineTo(200, 195);
+  myContext.lineTo(235, 195);
+  myContext.closePath();
+  myContext.fill();
+
+  // Purple rectangle
+  myContext.fillStyle = 'purple';
+  myContext.fillRect(350, 170, 100, 60);
+}">
+
+<!-- NEW: Random Colours button -->
+<input type="button" value="Random Colours" onclick="{
+  for (let i = 0; i < 10; i++) {
+    let randomX = Math.random() * 450;
+    let randomY = Math.random() * 250;
+    let randomSize = Math.random() * 35 + 10;
+
+    let randomColor = '#' + Math.floor(
+      Math.random() * 16777215
+    ).toString(16).padStart(6, '0');
+
+    myContext.fillStyle = randomColor;
+    myContext.fillRect(
+      randomX, randomY, randomSize, randomSize
+    );
+  }
+}">
+
+<!-- NEW: Smiley Face button -->
+<input type="button" value="Draw Smiley Face" onclick="{
+  // Face
+  myContext.beginPath();
+  myContext.fillStyle = 'yellow';
+  myContext.arc(250, 140, 70, 0, 2 * Math.PI);
+  myContext.fill();
+  myContext.strokeStyle = 'black';
+  myContext.lineWidth = 3;
+  myContext.stroke();
+
+  // Eyes
+  myContext.fillStyle = 'black';
+  myContext.beginPath();
+  myContext.arc(225, 120, 7, 0, 2 * Math.PI);
+  myContext.fill();
+
+  myContext.beginPath();
+  myContext.arc(275, 120, 7, 0, 2 * Math.PI);
+  myContext.fill();
+
+  // Smile
+  myContext.beginPath();
+  myContext.arc(250, 145, 35, 0, Math.PI);
+  myContext.stroke();
+}">
+
+<!-- NEW: Change Background button -->
+<input type="button" value="Change Background" onclick="{
+  let colors = ['lightblue', 'lightpink', 'lightyellow',
+                'lightgreen', 'lavender', 'white'];
+
+  myCanvas.style.backgroundColor =
+    colors[Math.floor(Math.random() * colors.length)];
+}">
+
+<!-- NEW: Clear Canvas button -->
+<input type="button" value="Clear Canvas" onclick="{
+  myContext.clearRect(0, 0, myCanvas.width, myCanvas.height);
+  myCanvas.style.backgroundColor = 'white';
+}">
+
+<script>
+   // Set up global variables
+  let myCanvas = document.getElementById('myCoolTag');
+  let myContext = myCanvas.getContext('2d');
+</script>
+
 <h2>Link to Ai assissted</h2>
 
 <a href="canvasai.html">Right here</a>
