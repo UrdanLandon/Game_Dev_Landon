@@ -50,7 +50,7 @@
    myString = document.getElementById('myArea05').value.split('')
    for (let myLoop=0;   myLoop < myString.length; myLoop++){
       myTemp = myString[myLoop]
-      if (myString[myLoop] == 't') {myTemp  = value.toUpperCase}
+      if (myString[myLoop] == 't') {myTemp  = 'T'}
       myString[myLoop] = myTemp
    }
    document.getElementById('myArea06').value = myString.join('')
