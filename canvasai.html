@@ -1,1 +1,137 @@
 <h2>Ai assissted:</h2>
+
+<h2 align="center">t2a23-canvas-Chatgpt-&-Landon</h2>
+
+<p>
+Click the buttons to draw different shapes and experiment with
+the HTML Canvas!
+</p>
+
+<!-- Original Draw Basic Shapes button -->
+<input type="button" value="Draw Basic Shapes" onclick="{
+  // Clear canvas first
+  myContext.clearRect(0, 0, myCanvas.width, myCanvas.height);
+
+  // 1. Draw a Line
+  myContext.beginPath();
+  myContext.lineWidth = 3;
+  myContext.strokeStyle = 'black';
+  myContext.moveTo(20, 20);
+  myContext.lineTo(150, 20);
+  myContext.stroke();
+
+  // 2. Draw a Rectangle
+  myContext.fillStyle = 'blue';
+  myContext.fillRect(30, 50, 100, 60);
+
+  // 3. Draw a Circle
+  myContext.beginPath();
+  myContext.lineWidth = 5;
+  myContext.strokeStyle = 'green';
+  myContext.arc(220, 80, 40, 0, 2 * Math.PI);
+  myContext.stroke();
+
+  // 4. Write Text
+  myContext.fillStyle = 'red';
+  myContext.font = '24px Arial';
+  myContext.fillText('Hello World!', 30, 100);
+}">
+
+<!-- NEW: More Shapes button -->
+<input type="button" value="Draw More Shapes" onclick="{
+  // Triangle
+  myContext.beginPath();
+  myContext.fillStyle = 'orange';
+  myContext.moveTo(350, 30);
+  myContext.lineTo(300, 120);
+  myContext.lineTo(400, 120);
+  myContext.closePath();
+  myContext.fill();
+
+  // Star
+  myContext.beginPath();
+  myContext.fillStyle = 'gold';
+  myContext.moveTo(250, 160);
+  myContext.lineTo(265, 195);
+  myContext.lineTo(300, 195);
+  myContext.lineTo(273, 218);
+  myContext.lineTo(285, 255);
+  myContext.lineTo(250, 233);
+  myContext.lineTo(215, 255);
+  myContext.lineTo(227, 218);
+  myContext.lineTo(200, 195);
+  myContext.lineTo(235, 195);
+  myContext.closePath();
+  myContext.fill();
+
+  // Purple rectangle
+  myContext.fillStyle = 'purple';
+  myContext.fillRect(350, 170, 100, 60);
+}">
+
+<!-- NEW: Random Colours button -->
+<input type="button" value="Random Colours" onclick="{
+  for (let i = 0; i < 10; i++) {
+    let randomX = Math.random() * 450;
+    let randomY = Math.random() * 250;
+    let randomSize = Math.random() * 35 + 10;
+
+    let randomColor = '#' + Math.floor(
+      Math.random() * 16777215
+    ).toString(16).padStart(6, '0');
+
+    myContext.fillStyle = randomColor;
+    myContext.fillRect(
+      randomX, randomY, randomSize, randomSize
+    );
+  }
+}">
+
+<!-- NEW: Smiley Face button -->
+<input type="button" value="Draw Smiley Face" onclick="{
+  // Face
+  myContext.beginPath();
+  myContext.fillStyle = 'yellow';
+  myContext.arc(250, 140, 70, 0, 2 * Math.PI);
+  myContext.fill();
+  myContext.strokeStyle = 'black';
+  myContext.lineWidth = 3;
+  myContext.stroke();
+
+  // Eyes
+  myContext.fillStyle = 'black';
+  myContext.beginPath();
+  myContext.arc(225, 120, 7, 0, 2 * Math.PI);
+  myContext.fill();
+
+  myContext.beginPath();
+  myContext.arc(275, 120, 7, 0, 2 * Math.PI);
+  myContext.fill();
+
+  // Smile
+  myContext.beginPath();
+  myContext.arc(250, 145, 35, 0, Math.PI);
+  myContext.stroke();
+}">
+
+<!-- NEW: Change Background button -->
+<input type="button" value="Change Background" onclick="{
+  let colors = ['lightblue', 'lightpink', 'lightyellow',
+                'lightgreen', 'lavender', 'white'];
+
+  myCanvas.style.backgroundColor =
+    colors[Math.floor(Math.random() * colors.length)];
+}">
+
+<!-- NEW: Clear Canvas button -->
+<input type="button" value="Clear Canvas" onclick="{
+  myContext.clearRect(0, 0, myCanvas.width, myCanvas.height);
+  myCanvas.style.backgroundColor = 'white';
+}">
+
+<br><br>
+
+<!-- Original canvas -->
+<canvas id="myCoolTag" width="500" height="300"
+style="border:1px solid #000000; background-color:white;">
+</canvas
