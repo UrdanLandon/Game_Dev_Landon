@@ -31,16 +31,16 @@ function myHitOther(my1,my2){
 
 
 function myCheckHit(){
-   let myChange01 = ''
-   let myChange02 = ''
+   let myChange01 = document.getElementById(my1Hit).value
+   let myChange02 = document.getElementById(my2Hit).value
    if ( myHitOther('myImg01','myImg02') ){
        alert('you lose')  
        document.getElementById('myImg01').style.left = '20px'
        location = 't2a13-keydown.html'  
    }
    // more if statements here like the above
-   if ( myHitOther('myImg01','myImg03') ){console.log('Are you sure you want to continue?'); myChange01 += 'true'}
-   if ( myHitOther('myImg01','myImg04'); && myChange01 != 'true'){console.log('This will be reversible!'); myChange02 += 'true'}
+   if ( myHitOther('myImg01','myImg03'); && myChange01 != true){console.log('Are you sure you want to continue?'); myChange01 = true}
+   if ( myHitOther('myImg01','myImg04'); && myChange01 != true){console.log('This will be reversible!'); myChange02 = true}
 }  // end of myCheckHit()
 
 
