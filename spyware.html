@@ -3,7 +3,7 @@
 <textarea id="myArea01" rows=4 cols=70>Hello how are you </textarea><br>
 
 
-<input type=button value="encrypt" onclick="{
+<input type=button value="Encrypt" onclick="{
    let myTemp = ''
    myString = document.getElementById('myArea01').value.toLowerCase().split('')
    for (let myLoop=0;   myLoop < myString.length; myLoop++){
@@ -19,7 +19,7 @@
 
 <textarea id="myArea02" rows=4 cols=70></textarea><br>
 
-<input type=button value="decrypt" onclick="{
+<input type=button value="Decrypt" onclick="{
    let myFix = ''
    myCoil = document.getElementById('myArea02').value.split('')
    for (let myLoop=0; myLoop < myCoil.length;  myLoop++){
@@ -34,18 +34,23 @@
 
   <textarea id="myArea03" rows=4 cols=70></textarea><br>
 
+<input type=button value="Clear" onclick="{
+   document.getElementById('myArea02').value = ''
+   document.getElementById('myArea03').value = ''
+}">
+
 <h2> Advanced Form </h2>
 
 <textarea id="myArea04" rows=4 cols=70>This is a sentance.</textarea><br>
 
-<input type=button value="decapitalize" onclick="{
+<input type=button value="Decapitalize" onclick="{
    myString = document.getElementById('myArea04').value.toLowerCase().split('')
    document.getElementById('myArea05').value = myString.join('')
 }"><br><br>
 
 <textarea id="myArea05" rows=4 cols=70></textarea><br>
 
-<input type=button value="recapitalize" onclick="{
+<input type=button value="Recapitalize" onclick="{
    let myTemp = ''
    myString = document.getElementById('myArea05').value.split('')
    for (let myLoop=0;   myLoop < myString.length; myLoop++){
@@ -57,3 +62,8 @@
 }"><br><br>
 
 <textarea id="myArea06" rows=4 cols=70></textarea><br>
+
+<input type=button value="Clear Second" onclick="{
+   document.getElementById('myArea05').value = ''
+   document.getElementById('myArea06').value = ''
+}">
