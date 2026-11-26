@@ -31,16 +31,20 @@ function myHitOther(my1,my2){
 
 
 function myCheckHit(){
-   let myChange01 = document.getElementById(my1Hit).value
-   let myChange02 = document.getElementById(my2Hit).value
    if ( myHitOther('myImg01','myImg02') ){
        alert('you lose')  
        document.getElementById('myImg01').style.left = '20px'
        location = 't2a13-keydown.html'  
    }
    // more if statements here like the above
-   if ( myHitOther('myImg01','myImg03'); && myChange01 != true){console.log('Are you sure you want to continue?'); myChange01 = true}
-   if ( myHitOther('myImg01','myImg04'); && myChange01 != true){console.log('This will be reversible!'); myChange02 = true}
+   if ( myHitOther('myImg01','myImg03') && my1Hit != true)
+             {console.log('Are you sure you want to continue?') 
+                my1Hit = true
+             }
+   if ( myHitOther('myImg01','myImg04') && my2Hit != true)
+             {console.log('This will be reversible!') 
+                my2Hit = true
+             }
 }  // end of myCheckHit()
 
 
@@ -48,8 +52,8 @@ function myCheckHit(){
 
 <img id="myImg01" style="position:absolute; width:100px; height:80px; top:0px; left:50px;"  src="myImage01.jpg">
 <img id="myImg02" style="position:absolute; width:100px; height:80px; top:0px; left:250px;" src="myImage02.jpg">
-<img id="myImg03" style="position:absolute; width:10px; height:40px; top:0px; left:100px;" src="myImage03.jpg">
-<img id="myImg04" style="position:absolute; width:10px; height:40px; top:0px; left:200px;" src="myImage04.jpg">
+<img id="myImg03" style="position:absolute; width:10px; height:40px; top:0px; left:100px;"  src="myImage03.jpg">
+<img id="myImg04" style="position:absolute; width:10px; height:40px; top:0px; left:200px;"  src="myImage04.jpg">
 
 <input type=button value="Auto Background Left" onclick="{
   clearInterval(myClock)
