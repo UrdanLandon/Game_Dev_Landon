@@ -34,19 +34,17 @@
 }">
 
 <input type=button value="Sortw" onclick="{
- 
-   myCards.sort(function(a,b) {
+  myCards.sort(function(a,b) {
      return a - b;
    });
    
    let myTemp = '';
    
-  for ( let myLoop = 0;   myLoop < myMax;  myLoop++) {
-     myTemp += myLoop + ' = '+ myCards[myLoop] + '<br>';
+   for ( let myLoop = 0;   myLoop < myMax;  myLoop++) {
+      myTemp += myLoop + ' = '+ myCards[myLoop] + '<br>';
   }
    
    document.getElementById('myDiv01').innerHTML = myTemp;
-   // you do this stuff
 }">
 
 <div id="myDiv01">...</div>
