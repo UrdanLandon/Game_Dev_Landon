@@ -20,11 +20,17 @@
 }">
 
 <input type=button value="Sort" onclick="{
-  let myTemp = 0
+ 
+   myCards.sort(function(a,b){
+     return a - b}
+   );
+   
+   let myTemp = ''
+   
   for ( let myLoop = 0;   myLoop < myMax;  myLoop++){
      myTemp += myLoop + ' = '+ myCards[myLoop] + '<br>'
   }
-   myCards.sort(a - b){return a};
+   
    document.getElementById('myDiv01').innerHTML = myTemp
    // you do this stuff
 }">
